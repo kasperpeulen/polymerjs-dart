@@ -1,0 +1,19 @@
+{
+  "name": "polymerjs-dart",
+  "version": "0.0.1",
+  "homepage": "https://github.com/kasperpeulen/polymerjs-dart",
+  "authors": [
+    "Kasper Peulen <kasperpeulen@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer"
+  }
+}
