@@ -162,8 +162,7 @@ void main() {
       expect(domApi.innerHTML, '<span>My span updated.</span>');
     });
     test('method insertBefore', () {
-      expect(
-          domApi.insertBefore(beforeNode, domApi['firstChild']), beforeNode);
+      expect(domApi.insertBefore(beforeNode, domApi['firstChild']), beforeNode);
     });
     test('getter firstChild', () {
       expect(domApi.firstChild, beforeNode);
@@ -194,8 +193,7 @@ void main() {
       expect(domApi.querySelector('span'), new isInstanceOf<SpanElement>());
     });
     test('method querySelectorAll', () {
-      expect(
-          domApi.querySelectorAll('span'), new isInstanceOf<List<Node>>());
+      expect(domApi.querySelectorAll('span'), new isInstanceOf<List<Node>>());
     });
     test('method replaceChild', () {
       var span = new SpanElement()..text = 'Before Node updated. ';
