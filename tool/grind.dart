@@ -1,3 +1,5 @@
+library polymerjs.grind;
+
 import 'package:grinder/grinder.dart';
 
 const dartium = 'dartium';
@@ -5,12 +7,14 @@ const chrome = 'chrome';
 const firefox = 'firefox';
 const safari = 'safari';
 
-const allPlatforms = const ['dartium,firefox,chrome,safari'];
+const macPlatforms = const ['dartium,firefox,chrome,safari'];
 
 const PolymerDom = 'test/PolymerDom_test.dart';
+const PolymerBase = 'test/PolymerBase_test.dart';
 
 const allFiles = const [
-  PolymerDom
+  PolymerDom,
+  PolymerBase
 ];
 
 main(args) => grind(args);
@@ -26,4 +30,4 @@ bower() {
 test() =>
     new TestRunner().test(
         files: allFiles,
-        platformSelector: allPlatforms);
+        platformSelector: macPlatforms);

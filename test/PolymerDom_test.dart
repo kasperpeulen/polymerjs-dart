@@ -1,5 +1,5 @@
 @TestOn('browser')
-library tests;
+library polymerjs.polymerdom_test;
 
 import 'dart:html';
 import 'dart:js';
@@ -22,7 +22,7 @@ void main() {
     beforeNode = new SpanElement()..text = 'Before Node. ';
   });
 
-  group('Polymer.dom raw js', () {
+  group('raw js', () {
     test('field node', () {
       expect(domApi['node'], node);
     });
@@ -117,7 +117,7 @@ void main() {
     });
   });
 
-  group('Polymer.dom dart wrapper', () {
+  group('dart wrapper', () {
     test('field node', () {
       expect(domApi.node, node);
     });
