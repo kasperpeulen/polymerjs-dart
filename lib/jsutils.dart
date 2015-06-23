@@ -29,6 +29,16 @@ abstract class JsMixin {
 }
 
 dynamic dartify(js) {
+  if (js is HtmlElement) {
+    String name = js.tagName;
+    if (!name.contains("-")) {
+      return js;
+    }
+    if (constructorFromString.containsKey(name)) {
+      return constructorFromString[name](js);
+    }
+    return new PolymerElement.from(js);
+  }
   if (js is JsArray) {
     return js.map((item) => dartify(item)).toList();
   }
@@ -79,3 +89,64 @@ Map<JsFunction, Type> dartTypeFromJs = {
   context["Object"]: Map,
   context["JsFunction"]: Function
 };
+
+dynamic jsify(Object dartObject) {
+  if (dartObject == null) {
+    return null;
+  } else if (dartObject is JsObject) {
+    return dartObject;
+  } else if (dartObject is List) {
+    return new JsArray.from(dartObject.map((item) => jsify(item)));
+  } else if (dartObject is Map<String, dynamic>) {
+    JsObject jsObject = new JsObject(context["Object"]);
+    dartObject.forEach((key, value) {
+      jsObject[key] = jsify(value);
+    });
+    return jsObject;
+  } else if (dartObject is Type) {
+    return jsTypeFromDart[dartObject];
+  } else if (dartObject is Function) {
+    return new JsFunction.withThis((HtmlElement element,
+                                    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]) {
+      List args = [element, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
+      args.removeWhere((e) => e == null);
+      args = args.map(dartify).toList();
+      while (argCount(dartObject) < args.length) {
+        args.removeLast();
+      }
+      while (argCount(dartObject) > args.length) {
+        args.add(null);
+      }
+      return Function.apply(dartObject, args);
+    });
+  }
+  return dartObject;
+}
+
+int argCount(Function f) {
+  if (f is Func0) return 0;
+  if (f is Func1) return 1;
+  if (f is Func2) return 2;
+  if (f is Func3) return 3;
+  if (f is Func4) return 4;
+  if (f is Func5) return 5;
+  if (f is Func6) return 6;
+  if (f is Func7) return 7;
+  if (f is Func7) return 8;
+  if (f is Func7) return 9;
+  if (f is Func7) return 10;
+  throw 'not supported for more that 10 args';
+}
+typedef Func0();
+typedef Func1(p1);
+typedef Func2(p1,p2);
+typedef Func3(p1,p2,p3);
+typedef Func4(p1,p2,p3,p4);
+typedef Func5(p1,p2,p3,p4,p5);
+typedef Func6(p1,p2,p3,p4,p6);
+typedef Func7(p1,p2,p3,p4,p6,p7);
+typedef Func8(p1,p2,p3,p4,p6,p7,p8);
+typedef Func9(p1,p2,p3,p4,p6,p7,p8,p9);
+typedef Func10(p1,p2,p3,p4,p6,p7,p8,p9,p10);
+
+
