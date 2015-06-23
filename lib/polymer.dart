@@ -12,6 +12,14 @@ export 'package:polymerjs/polymerdom.dart';
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];
 
+  // TODO add tests
+  static call(Map constructor) => context.callMethod("Polymer", [jsify(constructor)]);
+
+  // TODO add tests
+  static JsObject Class(Map constructor) {
+    return context["Polymer"].callMethod("Class", [jsify(constructor)]);
+  }
+
   /// Polymer provides a custom API for manipulating DOM such that local DOM and
   /// light DOM trees are properly maintained. These methods and properties have
   /// the same signatures as their standard DOM equivalents, except that properties
