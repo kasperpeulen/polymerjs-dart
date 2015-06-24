@@ -11,6 +11,11 @@ export 'package:polymerjs/polymerdom.dart';
 export 'package:polymerjs/dollar_functions.dart';
 export 'package:polymerjs/event_details.dart';
 
+
+typedef PolymerElement DartConstructor(HtmlElement element);
+
+Map<String, Function> constructorFromString = {};
+
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];
 
@@ -28,11 +33,10 @@ class Polymer extends Object {
         [tagName, jsConstructor]);
   }
 
-  // TODO add tests
+  // TODO more tests
   static JsFunction call(Map constructor) =>
       context.callMethod("Polymer", [jsify(constructor)]);
 
-  // TODO add tests
   static JsFunction Class(Map constructor) =>
       context["Polymer"].callMethod("Class", [jsify(constructor)]);
 
@@ -57,6 +61,7 @@ class Polymer extends Object {
   /// such as adding or removing classes in this element's local DOM.
   static updateStyles() => context["Polymer"].callMethod("updateStyles");
 }
+
 
 class WebElement extends Object with JsMixin {
   final HtmlElement element;
@@ -131,5 +136,3 @@ class PolymerElement extends WebElement with PolymerBase {
   JsObject get customStyle => this["customStyle"];
 }
 
-typedef PolymerElement DartConstructor(HtmlElement element);
-Map<String, Function> constructorFromString = {};
