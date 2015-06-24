@@ -18,7 +18,7 @@ void main() {
 }
 ```
 
-There are many other examples in the [polymerjs directory](https://github.com/kasperpeulen/polymerjs-dart/tree/master/polymerjs_examples/web).
+There are many other examples in the [polymerjs directory](https://github.com/kasperpeulen/polymerjs-dart/tree/master/polymerjs_examples).
 
 ##Roadmap
 
