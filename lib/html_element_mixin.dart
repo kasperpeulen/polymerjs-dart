@@ -93,6 +93,9 @@ abstract class HtmlElementMixin {
   /// vertical padding and borders, in pixels, as an integer.
   int get offsetHeight => element.offsetHeight;
 
+  /// Returns the name of the element.
+  String get tagName => element.tagName;
+
   /**
    * Adds a node to the end of the child [nodes] list of this node.
    *
