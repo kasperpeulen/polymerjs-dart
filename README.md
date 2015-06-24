@@ -22,7 +22,7 @@ void main() {
 
 This package can be used together with the `web_components` package to create custom elements in inline dart scripts:
 
-```dart
+```html
 <dom-module id="annotated-event">
 
   <template>
