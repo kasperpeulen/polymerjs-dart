@@ -13,12 +13,14 @@ const PolymerDom = 'test/polymer_dom_test.dart';
 const PolymerBase = 'test/polymer_base_test.dart';
 const PolymerCall = 'test/polymer_call_test.dart';
 const DollarFunctions = 'test/dollar_functions_test.dart';
+const EventDetails = 'test/event_details_test.dart';
 
 const allFiles = const [
   PolymerDom,
   PolymerBase,
   PolymerCall,
-  DollarFunctions
+  DollarFunctions,
+  EventDetails
 ];
 
 main(args) => grind(args);
