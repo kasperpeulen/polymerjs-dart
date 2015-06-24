@@ -93,6 +93,25 @@ class WebElement extends Object with JsMixin, HtmlElementMixin {
   void appendTo(HtmlElement parent) {
     parent.append(element);
   }
+
+  bool hasAttribute(String name) => element.attributes.containsKey(name);
+
+  void toggleAttribute(String name, [bool value]) {
+    if (value == null) value = !element.attributes.containsKey(name);
+
+    if (value) {
+      element.setAttribute(name, '');
+    } else {
+      element.attributes.remove(name);
+    }
+  }
+
+  String getAttribute(String name) => element.getAttribute(name);
+
+  void setAttribute(String name, [String value = '']) =>
+      element.setAttribute(name, value);
+
+  String clearAttribute(String name) => element.attributes.remove(name);
 }
 
 class PolymerElement extends WebElement with PolymerBase {
