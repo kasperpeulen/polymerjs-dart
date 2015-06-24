@@ -30,8 +30,8 @@ abstract class JsMixin {
 
 dynamic dartify(js) {
   if (js is HtmlElement) {
-    String name = js.tagName;
-    if (!name.contains("-")) {
+    String name = js.tagName.toLowerCase();
+    if (!name.contains("-") && js.getAttribute('is') == null) {
       return js;
     }
     if (constructorFromString.containsKey(name)) {
@@ -149,4 +149,10 @@ typedef Func8(p1,p2,p3,p4,p6,p7,p8);
 typedef Func9(p1,p2,p3,p4,p6,p7,p8,p9);
 typedef Func10(p1,p2,p3,p4,p6,p7,p8,p9,p10);
 
+HtmlElement htmlElementFromJsElement(JsObject jsHTMLElement) {
+  context['hack_to_convert_jsobject_to_html_element'] = jsHTMLElement;
+  Element element = context['hack_to_convert_jsobject_to_html_element'];
+  context.deleteProperty('hack_to_convert_jsobject_to_html_element');
+  return element;
+}
 

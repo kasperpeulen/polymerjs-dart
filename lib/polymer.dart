@@ -12,13 +12,18 @@ export 'package:polymerjs/polymerdom.dart';
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];
 
-  // TODO add tests
-  static call(Map constructor) => context.callMethod("Polymer", [jsify(constructor)]);
+  static void registerDartClass(String tagName, DartConstructor) {
+    tagName = tagName.toLowerCase();
+    constructorFromString[tagName] = (element) => DartConstructor(element);
+  }
 
   // TODO add tests
-  static JsObject Class(Map constructor) {
-    return context["Polymer"].callMethod("Class", [jsify(constructor)]);
-  }
+  static call(Map constructor) =>
+      context.callMethod("Polymer", [jsify(constructor)]);
+
+  // TODO add tests
+  static JsObject Class(Map constructor) =>
+      context["Polymer"].callMethod("Class", [jsify(constructor)]);
 
   /// Polymer provides a custom API for manipulating DOM such that local DOM and
   /// light DOM trees are properly maintained. These methods and properties have
@@ -67,6 +72,9 @@ class WebElement extends Object with JsMixin {
 
   WebElement.from(this.element);
 
+  WebElement.fromJsObject(JsObject jsHTMLElement)
+      : element = htmlElementFromJsElement(jsHTMLElement);
+
   void appendTo(HtmlElement parent) {
     parent.append(element);
   }
@@ -77,6 +85,9 @@ class PolymerElement extends WebElement with PolymerBase {
       : super.extension(tag, typeExtension);
 
   PolymerElement.from(HtmlElement element) : super.from(element);
+
+  PolymerElement.fromConstructor(JsFunction constructor, [List args])
+      : super.fromJsObject(new JsObject(constructor, args));
 
   @override
   dynamic operator [](String propertyName) {
@@ -92,7 +103,7 @@ class PolymerElement extends WebElement with PolymerBase {
 
   @override
   void operator []=(String propertyName, dynamic value) {
-    if(propertyName.contains(".")) {
+    if (propertyName.contains(".")) {
       set(propertyName, value);
     } else {
       js[propertyName] = value;
@@ -107,28 +118,28 @@ class PolymerElement extends WebElement with PolymerBase {
   /// setting key-value pairs in `customStyle` on the element and then calling
   /// `updateStyles.
   JsObject get customStyle => this["customStyle"];
-
 }
 
 /// Finds the first descendant element of this document that matches the
 /// specified group of selectors.
 HtmlElement $(String selectors) => querySelector(selectors);
 
-PolymerElement $$(String selectors) {
+WebElement $$(String selectors) {
   HtmlElement element = $(selectors);
   if (element == null) {
     return null;
   }
-  String name = element.tagName;
-  if (!name.contains("-")) {
+  String name = element.tagName.toLowerCase();
+  // if element is not a custom element, return a web element
+  if (!name.contains("-") && element.getAttribute('is') == null) {
     return new WebElement.from(element);
   }
+  // search for a specific constructor
   if (constructorFromString.containsKey(name)) {
     return constructorFromString[name](element);
   }
   return new PolymerElement.from(element);
 }
 
-Map<String, Function> constructorFromString = {
-
-};
+typedef PolymerElement DartConstructor(HtmlElement element);
+Map<String, Function> constructorFromString = {};

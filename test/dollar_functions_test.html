@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <script src='packages/polymerjs/components/webcomponentsjs/webcomponents-lite.js'></script>
+    <link rel='import' href='packages/polymerjs/components/polymer/polymer.html'>
+
+    <script src='packages/test/dart.js'></script>
+    <link rel='x-dart-test' href='dollar_functions_test.dart'>
+    <!--<script type='application/dart' src='dollar_functions_test.dart'></script>-->
+  </head>
+  <body>
+    <div></div>
+    <custom-element></custom-element>
+    <input is="my-input">
+    <script>
+      Polymer({
+        'is': 'custom-element'
+      });
+      Polymer({
+        'is': 'my-input',
+        'extends': 'input'
+      })
+    </script>
+  </body>
+</html>
