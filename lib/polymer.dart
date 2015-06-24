@@ -8,7 +8,6 @@ import 'package:polymerjs/polymerdom.dart';
 import 'package:polymerjs/polymerbase.dart';
 import 'package:polymerjs/html_element_mixin.dart';
 
-export 'dart:html';
 export 'package:polymerjs/polymerdom.dart';
 export 'package:polymerjs/dollar_functions.dart';
 export 'package:polymerjs/event_details.dart';
