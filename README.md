@@ -20,7 +20,7 @@ void main() {
 
 ## WebComponents
 
-This package can be used together with the `web_components` package to create webcomponents using inline dart scripts:
+This package can be used together with the `web_components` package to create custom elements in inline dart scripts:
 
 ```dart
 <dom-module id="annotated-event">
