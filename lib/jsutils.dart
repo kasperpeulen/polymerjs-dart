@@ -29,6 +29,12 @@ abstract class JsMixin {
   }
 }
 
+/// Add this class as mixin to your object. You need to implement the **static**
+/// js field.
+///
+/// `object['jsproperty']` will act like `Object.js['jsproperty']`
+///
+/// `object['jsfunction'](arg)` will act like `Object.js.callMethod('jsfunction', [arg])`
 abstract class JsStaticMixin {
   static JsObject js;
 
@@ -47,7 +53,14 @@ abstract class JsStaticMixin {
     js[propertyName] = value;
   }
 }
-
+/// Converts recursively a JsObject to a dart object.
+///
+/// [js] the parameter is dynamic, you can also pass in `HtmlElement` or
+/// `CustomEvent` as those are often automatically converted already.
+///
+/// A `HtmlElement` will be converted to a `PolymerElement` if necessary.
+///
+/// A `CustomEvent` will be converted to a [Detail] object.
 dynamic dartify(js) {
   if (js is HtmlElement) {
     String name = js.tagName.toLowerCase();
@@ -95,6 +108,7 @@ dynamic dartify(js) {
   return js;
 }
 
+/// Converts a `JsFunction` to a dart `Function`.
 Function functionFromJs(JsFunction jsFunction, {thisArg}) {
   return ([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]) {
     return jsFunction.apply([p1, p2, p3, p4, p5, p6, p7, p8, p9, p10],
@@ -102,6 +116,7 @@ Function functionFromJs(JsFunction jsFunction, {thisArg}) {
   };
 }
 
+/// For example `jsTypeFromDart[int] == context['Number']`.
 Map<Type, JsFunction> jsTypeFromDart = {
   int: context['Number'],
   double: context['Number'],
@@ -115,6 +130,7 @@ Map<Type, JsFunction> jsTypeFromDart = {
   Function: context["JsFunction"]
 };
 
+/// For example `dartTypeFromJs[context["Number"]] == num`.
 Map<JsFunction, Type> dartTypeFromJs = {
   context['Number']: num,
   context["Boolean"]: bool,
@@ -125,6 +141,9 @@ Map<JsFunction, Type> dartTypeFromJs = {
   context["JsFunction"]: Function
 };
 
+/// Converts recursively a dart object to a javascript object.
+/// The dart object can be a `List`, a `Map<String,dynamic>`, a `Type` or a
+/// `Function`.
 dynamic jsify(Object dartObject) {
   if (dartObject == null) {
     return null;
@@ -146,10 +165,10 @@ dynamic jsify(Object dartObject) {
       List args = [element, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
       args.removeWhere((e) => e == null);
       args = args.map(dartify).toList();
-      while (argCount(dartObject) < args.length) {
+      while (_argCount(dartObject) < args.length) {
         args.removeLast();
       }
-      while (argCount(dartObject) > args.length) {
+      while (_argCount(dartObject) > args.length) {
         args.add(null);
       }
       return Function.apply(dartObject, args);
@@ -158,36 +177,39 @@ dynamic jsify(Object dartObject) {
   return dartObject;
 }
 
-int argCount(Function f) {
-  if (f is Func0) return 0;
-  if (f is Func1) return 1;
-  if (f is Func2) return 2;
-  if (f is Func3) return 3;
-  if (f is Func4) return 4;
-  if (f is Func5) return 5;
-  if (f is Func6) return 6;
-  if (f is Func7) return 7;
-  if (f is Func7) return 8;
-  if (f is Func7) return 9;
-  if (f is Func7) return 10;
-  throw 'not supported for more that 10 args';
-}
-typedef Func0();
-typedef Func1(p1);
-typedef Func2(p1,p2);
-typedef Func3(p1,p2,p3);
-typedef Func4(p1,p2,p3,p4);
-typedef Func5(p1,p2,p3,p4,p5);
-typedef Func6(p1,p2,p3,p4,p6);
-typedef Func7(p1,p2,p3,p4,p6,p7);
-typedef Func8(p1,p2,p3,p4,p6,p7,p8);
-typedef Func9(p1,p2,p3,p4,p6,p7,p8,p9);
-typedef Func10(p1,p2,p3,p4,p6,p7,p8,p9,p10);
-
+/// Converts a javscript HTMLElement to a dart HtmlElement object.
 HtmlElement htmlElementFromJsElement(JsObject jsHTMLElement) {
   context['hack_to_convert_jsobject_to_html_element'] = jsHTMLElement;
   Element element = context['hack_to_convert_jsobject_to_html_element'];
   context.deleteProperty('hack_to_convert_jsobject_to_html_element');
   return element;
 }
+
+int _argCount(Function f) {
+  if (f is _Func0) return 0;
+  if (f is _Func1) return 1;
+  if (f is _Func2) return 2;
+  if (f is _Func3) return 3;
+  if (f is _Func4) return 4;
+  if (f is _Func5) return 5;
+  if (f is _Func6) return 6;
+  if (f is _Func7) return 7;
+  if (f is _Func8) return 8;
+  if (f is _Func9) return 9;
+  if (f is _Func10) return 10;
+  throw 'not supported for more that 10 args';
+}
+typedef _Func0();
+typedef _Func1(p1);
+typedef _Func2(p1,p2);
+typedef _Func3(p1,p2,p3);
+typedef _Func4(p1,p2,p3,p4);
+typedef _Func5(p1,p2,p3,p4,p5);
+typedef _Func6(p1,p2,p3,p4,p6);
+typedef _Func7(p1,p2,p3,p4,p6,p7);
+typedef _Func8(p1,p2,p3,p4,p6,p7,p8);
+typedef _Func9(p1,p2,p3,p4,p6,p7,p8,p9);
+typedef _Func10(p1,p2,p3,p4,p6,p7,p8,p9,p10);
+
+
 
