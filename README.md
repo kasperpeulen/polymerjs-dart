@@ -18,9 +18,38 @@ void main() {
 }
 ```
 
-There are many other examples in the [polymerjs_examples directory](https://github.com/kasperpeulen/polymerjs-dart/tree/master/polymerjs_examples).
+## WebComponents
 
-##Roadmap
+This package can be used together with the `web_components` package to create webcomponents using inline dart scripts:
+
+```dart
+<dom-module id="annotated-event">
+
+  <template>
+    <button on-click="handleClick">Kick Me</button>
+  </template>
+
+  <script type="application/dart">
+    import "package:polymerjs/polymer.dart";
+    import 'package:initialize/initialize.dart';
+    
+    @initMethod
+    main() {
+      Polymer.call({
+        'is': 'annotated-event',
+
+        'handleClick': () {
+          window.alert("Ow!");
+        }
+      });
+    }
+  </script>
+</dom-module>
+```
+
+For complete working examples, check out the [polymerjs_examples directory](https://github.com/kasperpeulen/polymerjs-dart/tree/master/polymerjs_examples).
+
+## Roadmap
 
 * 0.1.0: Making it possible to create polymer custom-elements, with a very light wrapper
 * 0.2.0: Porting all paper and iron elements
