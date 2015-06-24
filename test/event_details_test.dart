@@ -9,7 +9,7 @@ import 'dart:js';
 import 'package:test/test.dart';
 
 import 'package:polymerjs/polymer.dart';
-import 'package:polymerjs/iron/iron-test-helpers.dart';
+import 'package:polymerjs/iron/iron_test_helpers.dart';
 import 'dart:async';
 
 void main() {

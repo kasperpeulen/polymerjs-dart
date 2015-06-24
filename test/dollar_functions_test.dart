@@ -1,13 +1,9 @@
 @TestOn('browser')
 library polymerjs.dollar_functions_test;
 
-import 'dart:html';
-import 'dart:js';
-
 import 'package:test/test.dart';
 
 import 'package:polymerjs/polymer.dart';
-import 'dart:async';
 
 void main() {
   test("custom-element", () {
