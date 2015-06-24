@@ -31,7 +31,12 @@ class MockInteractions extends Object with JsStaticMixin {
 
   static keyUpOn(HtmlElement target, {int keyCode: 13}) => js["keyUpOn"].apply([target,keyCode]);
 
-  // TODO: implements those two as well
-  // middleOfNode: middleOfNode,
-  // topLeftOfNode: topLeftOfNode
+  static Point middleOfNode(HtmlElement element) {
+    var point = js['middleOfNode'].apply([element]);
+    return new Point(point['x'], point['y']);
+  }
+  static Point topLeftOfNode(HtmlElement element) {
+    var point = js['topLeftOfNode'].apply([element]);
+    return new Point(point['x'], point['y']);
+  }
 }
