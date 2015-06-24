@@ -122,7 +122,7 @@ void main() {
       expect(domApi.node, node);
     });
     test('method appendChild', () =>
-        expect(domApi.appendChild(child), new isInstanceOf<SpanElement>()));
+        expect(domApi.append(child), new isInstanceOf<SpanElement>()));
     test('getter childNodes', () => expect(domApi.childNodes, [child]));
     test('getter children', () => expect(domApi.children, [child]));
     test('getter classList', () {
@@ -212,11 +212,11 @@ void main() {
       expect(node.getAttribute('role'), null);
     });
     test('getter textContent', () {
-      expect(domApi.textContent, 'My span updated.');
+      expect(domApi.text, 'My span updated.');
     });
     test('setter textContent', () {
-      domApi.textContent = 'My span.';
-      expect(domApi.textContent, 'My span.');
+      domApi.text = 'My span.';
+      expect(domApi.text, 'My span.');
     });
   });
 }

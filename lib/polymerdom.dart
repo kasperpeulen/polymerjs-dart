@@ -46,7 +46,7 @@ class PolymerDom extends Object with JsMixin {
   /// performance. In order to interrogate the dom (e.g. offsetHeight,
   /// getComputedStyle, etc.) immediately after one of these operations, call
   /// PolymerDom.flush() first.
-  Node appendChild(node) => this['appendChild'](node);
+  Node append(node) => this['appendChild'](node);
 
   /// Read-only property that returns a live list of child nodes of the given element.
   ///
@@ -181,9 +181,9 @@ class PolymerDom extends Object with JsMixin {
       this['setAttribute'](name, value);
 
   /// Represents the text content of a node and its descendants.
-  String get textContent => this['textContent'];
+  String get text => this['textContent'];
   /// Represents the text content of a node and its descendants.
-  void set textContent(String value) {
+  void set text(String value) {
     this['textContent'] = value;
   }
 }
