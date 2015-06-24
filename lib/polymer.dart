@@ -8,21 +8,31 @@ import 'package:polymerjs/polymerdom.dart';
 import 'package:polymerjs/polymerbase.dart';
 
 export 'package:polymerjs/polymerdom.dart';
+export 'package:polymerjs/dollar_functions.dart';
 
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];
 
-  static void registerDartClass(String tagName, DartConstructor) {
+  static void registerDartClass(String tagName, DartConstructor constructor) {
     tagName = tagName.toLowerCase();
-    constructorFromString[tagName] = (element) => DartConstructor(element);
+    constructorFromString[tagName] = (element) => constructor(element);
+  }
+
+  static void registerElement(String tagName, JsFunction jsConstructor, [DartConstructor constructor]) {
+    if (constructor != null) {
+      registerDartClass(tagName, constructor);
+    }
+    new JsObject.fromBrowserObject(document).callMethod(
+        'registerElement',
+        [tagName, jsConstructor]);
   }
 
   // TODO add tests
-  static call(Map constructor) =>
+  static JsFunction call(Map constructor) =>
       context.callMethod("Polymer", [jsify(constructor)]);
 
   // TODO add tests
-  static JsObject Class(Map constructor) =>
+  static JsFunction Class(Map constructor) =>
       context["Polymer"].callMethod("Class", [jsify(constructor)]);
 
   /// Polymer provides a custom API for manipulating DOM such that local DOM and
@@ -118,27 +128,6 @@ class PolymerElement extends WebElement with PolymerBase {
   /// setting key-value pairs in `customStyle` on the element and then calling
   /// `updateStyles.
   JsObject get customStyle => this["customStyle"];
-}
-
-/// Finds the first descendant element of this document that matches the
-/// specified group of selectors.
-HtmlElement $(String selectors) => querySelector(selectors);
-
-WebElement $$(String selectors) {
-  HtmlElement element = $(selectors);
-  if (element == null) {
-    return null;
-  }
-  String name = element.tagName.toLowerCase();
-  // if element is not a custom element, return a web element
-  if (!name.contains("-") && element.getAttribute('is') == null) {
-    return new WebElement.from(element);
-  }
-  // search for a specific constructor
-  if (constructorFromString.containsKey(name)) {
-    return constructorFromString[name](element);
-  }
-  return new PolymerElement.from(element);
 }
 
 typedef PolymerElement DartConstructor(HtmlElement element);
