@@ -9,8 +9,8 @@ const safari = 'safari';
 
 const macPlatforms = const ['dartium,firefox,chrome,safari'];
 
-const PolymerDom = 'test/PolymerDom_test.dart';
-const PolymerBase = 'test/PolymerBase_test.dart';
+const PolymerDom = 'test/polymer_dom_test.dart';
+const PolymerBase = 'test/polymer_base_test.dart';
 const PolymerCall = 'test/polymer_call_test.dart';
 const DollarFunctions = 'test/dollar_functions_test.dart';
 
