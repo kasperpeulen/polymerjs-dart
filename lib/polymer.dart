@@ -9,6 +9,7 @@ import 'package:polymerjs/polymerbase.dart';
 
 export 'package:polymerjs/polymerdom.dart';
 export 'package:polymerjs/dollar_functions.dart';
+export 'package:polymerjs/event_details.dart';
 
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];

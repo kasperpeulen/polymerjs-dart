@@ -3,6 +3,7 @@ library polymerjs.jsutils;
 import 'dart:js';
 import 'dart:html';
 import 'package:polymerjs/polymer.dart';
+import 'package:polymerjs/event_details.dart';
 
 /// Add this class as mixin to your object. You need to implement the js field.
 ///
@@ -47,6 +48,21 @@ dynamic dartify(js) {
       return dartTypeFromJs[js];
     }
     return functionFromJs(js);
+  }
+  if (js is CustomEvent){
+    if (js.type == "track") {
+      return new TrackDetail(new JsObject.fromBrowserObject(js)["detail"], js);
+    }
+    if (js.type == "tap") {
+      return new TapDetail(new JsObject.fromBrowserObject(js)["detail"], js);
+    }
+    if (js.type == 'down') {
+      return new DownDetail(new JsObject.fromBrowserObject(js)["detail"], js);
+    }
+    if (js.type == 'up') {
+      return new UpDetail(new JsObject.fromBrowserObject(js)["detail"], js);
+    }
+    return js;
   }
   if (js is JsObject) {
     if (js['constructor'] != context['Object']) return js;
