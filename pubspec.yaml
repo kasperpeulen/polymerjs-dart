@@ -4,7 +4,7 @@ author: Kasper Peulen <kasperpeulen@gmail.com>
 description: Dart wrapper for polymer js 1.0.
 homepage: https://github.com/kasperpeulen/polymerjs-dart
 environment:
-  sdk: '>=1.0.0 <2.0.0'
+  sdk: '<2.0.0'
 dev_dependencies:
   test: ^0.12.3+2
   grinder: ^0.7.1+3
