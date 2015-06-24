@@ -6,11 +6,11 @@ import 'dart:html';
 import 'package:polymerjs/jsutils.dart';
 import 'package:polymerjs/polymerdom.dart';
 import 'package:polymerjs/polymerbase.dart';
+import 'package:polymerjs/html_element_mixin.dart';
 
 export 'package:polymerjs/polymerdom.dart';
 export 'package:polymerjs/dollar_functions.dart';
 export 'package:polymerjs/event_details.dart';
-
 
 typedef PolymerElement DartConstructor(HtmlElement element);
 
@@ -62,8 +62,7 @@ class Polymer extends Object {
   static updateStyles() => context["Polymer"].callMethod("updateStyles");
 }
 
-
-class WebElement extends Object with JsMixin {
+class WebElement extends Object with JsMixin, HtmlElementMixin {
   final HtmlElement element;
 
   JsObject _js;
@@ -135,4 +134,3 @@ class PolymerElement extends WebElement with PolymerBase {
   /// `updateStyles.
   JsObject get customStyle => this["customStyle"];
 }
-

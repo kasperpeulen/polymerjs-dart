@@ -10,22 +10,22 @@ void main() {
     Polymer.call({
       'is': 'hello-world',
       'ready': (PolymerElement self) {
-        self.element.text = "Hello world";
+        self.text = "Hello world";
       }
     });
     new PolymerElement('hello-world')..appendTo(document.body);
-    expect($$('hello-world').element.text, 'Hello world');
+    expect($$('hello-world').text, 'Hello world');
   });
 
   test('setting innerHtml in ready', () {
     Polymer.call({
       'is': 'hello-world2',
       'ready': (PolymerElement self) {
-        self.element.innerHtml = "Hello world";
+        self.innerHtml = "Hello world";
       }
     });
     new PolymerElement('hello-world2')..appendTo(document.body);
-    expect($$('hello-world2').element.innerHtml, 'Hello world');
+    expect($$('hello-world2').innerHtml, 'Hello world');
   }, skip: "fails see https://github.com/dart-lang/sdk/issues/23666");
 
   test('custom constructor', () {
@@ -50,19 +50,19 @@ void main() {
       "is": "extend-input",
       "extends": "input",
       "created": (PolymerElement self) {
-        self.element.style.border = "1px solid red";
+        self.style.border = "1px solid red";
       }
     });
 
     var el1 = new PolymerElement.fromConstructor(MyInput)
       ..appendTo(document.body);
     expect(el1.element, new isInstanceOf<InputElement>());
-    expect(el1.element.style.border, "1px solid red");
+    expect(el1.style.border, "1px solid red");
 
     var el2 = new PolymerElement('input', 'extend-input')
       ..appendTo(document.body);
     expect(el2.element, new isInstanceOf<InputElement>());
-    expect(el2.element.style.border, "1px solid red");
+    expect(el2.style.border, "1px solid red");
   });
 
   test('dart class', () {
