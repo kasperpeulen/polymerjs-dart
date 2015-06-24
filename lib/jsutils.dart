@@ -29,6 +29,25 @@ abstract class JsMixin {
   }
 }
 
+abstract class JsStaticMixin {
+  static JsObject js;
+
+  dynamic operator [](String propertyName) {
+    var property = js[propertyName];
+
+    // if the property is a JsFunction, convert it to a dart function with a
+    // maximum of 10 parameters, all parameters are optional
+    if (property is JsFunction) {
+      return functionFromJs(property, thisArg: js);
+    }
+    return property;
+  }
+
+  void operator []=(String propertyName, dynamic value) {
+    js[propertyName] = value;
+  }
+}
+
 dynamic dartify(js) {
   if (js is HtmlElement) {
     String name = js.tagName.toLowerCase();
