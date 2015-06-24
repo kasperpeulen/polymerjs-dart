@@ -1,7 +1,7 @@
 name: polymerjs
 version: 0.0.1
-author: Kasper Peulen <kasperpeulen@gmail.com>
 description: Dart wrapper for polymer js 1.0.
+author: Kasper Peulen <kasperpeulen@gmail.com>
 homepage: https://github.com/kasperpeulen/polymerjs-dart
 environment:
   sdk: '<2.0.0'
