@@ -1,0 +1,53 @@
+<!-- The element’s basic initialization order is:
+
+ * created callback
+ * local DOM initialized
+ * ready callback
+ * factoryImpl callback
+ * attached callback
+
+Note that initialization order of may vary depending on whether or not the browser
+includes native support for web components. In particular, there are no guarantees
+with regard to initialization timing between sibling elements or between parents
+and light DOM children. You should not rely on observed timing to be identical
+across browsers, except as noted below.
+
+For a given element:
+
+ * The created callback is always called before ready.
+ * The ready callback is always called before attached.
+ * The ready callback is called on any local DOM children before it’s called on
+ the host element.
+
+This means that an element’s light DOM children may be initialized before or after
+the parent element, and an element’s siblings may become ready in any order.
+
+For accessing sibling elements when an element initializes you can call async
+from inside the attached callback. -->
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    Polymer.call({
+      "is": "initialization-order",
+
+      "attached" : (PolymerElement self) {
+        assert($$("#sibling") == null);
+        self.async(() {
+          assert($$("#sibling") != null);
+          print($$("#sibling").text);
+        });
+      }
+    });
+
+    new PolymerElement("initialization-order")
+     ..appendTo(document.body);
+    new PolymerElement('instance-via-code')
+      ..id = "sibling"
+      ..appendTo(document.body);
+  }
+
+
+</script>

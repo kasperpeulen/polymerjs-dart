@@ -1,0 +1,35 @@
+<!-- If you want to set up your custom element’s prototype chain but not register it
+immediately, you can use the  Polymer.Class function. Polymer.Class takes the
+same prototype argument as the Polymer function, and sets up the prototype chain,
+but does not register the element. Instead it returns a constructor that can be
+passed to document.registerElement to register your element with the browser,
+and after which can be used to instantiate new instances of your element via code.
+-->
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    var Constructor = Polymer.Class({
+      "is": "class-style-constructor",
+
+      "ready": (self) => self.text = "I'm a class-style-constructor tag"
+    });
+
+    var Constructor2 = Polymer.registerElement(
+        'class-style-constructor', Constructor);
+
+
+    new PolymerElement.fromConstructor(Constructor)
+     ..appendTo(document.body);
+
+    assert($$('class-style-constructor') != null);
+
+    new PolymerElement.fromConstructor(Constructor2)
+      ..id = "constructor2"
+      ..appendTo(document.body);
+
+    assert($$("#constructor2") != null);
+  }
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>4. Local DOM Basics and API</title>
+
+    <script src="packages/polymerjs_examples/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+    <link rel="import" href="1.local-dom-template.html">
+    <link rel="import" href="2.note-finding.html">
+    <link rel="import" href="3.dom-distribution.html">
+    <link rel="import" href="4.dom-api.html">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=RobotoDraft:300,300italic');
+
+      body {
+        color: #333;
+        font-family: "RobotoDraft", sans-serif;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body>
+    <local-dom-template></local-dom-template>
+    <node-finding></node-finding>
+    <dom-distribution>
+      <div>Not selected.</div>
+      <div class="special-selector">I am selected!</div>
+      <span class="special-selector">And me too!</span>
+      <div>I'm not</div>
+    </dom-distribution>
+    <dom-api></dom-api>
+    <script type="application/dart">
+      import 'package:polymerjs_examples/polymer.dart' show initWebComponents;
+
+      main() => initWebComponents();
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

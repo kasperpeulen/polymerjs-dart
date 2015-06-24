@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>2. Registration and lifecycle</title>
+
+    <script src="packages/polymerjs_examples/components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="1.instance-via-code.html">
+    <link rel="import" href="2.custom-constructor.html">
+    <link rel="import" href="3.extend-input.html">
+    <link rel="import" href="4.lifecycle-callbacks.html">
+    <link rel="import" href="5.initialization-order.html">
+    <link rel="import" href="6.static-attributes-on-host.html">
+    <link rel="import" href="7.class-style-constructor.html">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=RobotoDraft:300,300italic');
+
+      body {
+        color: #333;
+        font-family: "RobotoDraft", sans-serif;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="application/dart">
+      import 'package:polymerjs_examples/polymer.dart' show initWebComponents;
+
+      main() => initWebComponents();
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

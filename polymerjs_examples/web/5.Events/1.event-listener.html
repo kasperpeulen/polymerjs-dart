@@ -1,0 +1,37 @@
+<dom-module id="event-listener">
+
+  <template>
+    <div>I will respond</div>
+    <div>to a tap on</div>
+    <div>any of my children!</div>
+
+    <div id="special">I am special!</div>
+  </template>
+
+
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        'is': 'event-listener',
+
+        'listeners': {
+          'tap': 'regularTap',
+          'track': 'track',
+          'special.tap': 'specialTap'
+        },
+        "track": (_, TrackDetail e) {
+          print(e);
+        },
+        'regularTap': (_, TapDetail e) {
+          window.alert("Thank you for tapping");
+        },
+        'specialTap': (_, TapDetail e) {
+          window.alert("It was special tapping");
+        }
+      });
+    }
+  </script>
+</dom-module>

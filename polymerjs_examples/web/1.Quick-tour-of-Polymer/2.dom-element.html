@@ -1,0 +1,22 @@
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+
+<dom-module id="dom-element">
+
+  <!--Many elements include some internal DOM nodes to implement the element’s
+  UI and behavior. Polymer calls this local DOM, and it provides an easy way to
+  specify it.-->
+  <template>
+    <p>I'm a DOM element. This is my local DOM!</p>
+  </template>
+
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+    import 'package:initialize/initialize.dart' show initMethod;
+
+    @initMethod
+    main() => Polymer.call({
+      "is": "dom-element"
+    });
+  </script>
+
+</dom-module>

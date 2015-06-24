@@ -1,0 +1,47 @@
+<!-- To call an observer when any (deep) sub-property of an object changes,
+specify a path with a wildcard (*).
+
+When you specify a path with a wildcard, the argument passed to your observer is
+a change record object with the following properties:
+
+* path. Path to the property that changed.
+* value. New value of the path that changed.
+* base. The object matching the non-wildcard portion of the path.-->
+
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    Polymer.call({
+      'is': 'deep-path-observe',
+      'properties': {
+        'company': {
+          'type': Map,
+          'value': {
+            'manager': {
+              'name': 'John'
+            },
+            'secondManager': {
+              'name': 'Scott'
+            }
+          }
+        }
+      },
+
+      'observers': [
+        'userManagerChanged(company.manager.*)'
+      ],
+
+      'userManagerChanged': (self, changeRecord) {
+        print("${changeRecord["path"]} changed to ${changeRecord["value"]}");
+      },
+
+      'attached': (self) {
+        self['company.manager.name'] = 'Scott';
+        self['company.secondManager.name'] = 'John';
+      }
+    });
+  }
+</script>

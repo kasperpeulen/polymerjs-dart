@@ -1,0 +1,31 @@
+<!-- To support composition of an element’s light DOM with its local DOM, Polymer
+supports the <content> element. The <content> element provides an insertion point
+at which an element’s light DOM is combined with its local DOM. The <content>
+element supports a select attribute which filters nodes via a simple selector.
+-->
+
+<dom-module id="dom-distribution">
+  <template>
+    <header>Local dom header followed by distributed dom.</header>
+    <content select=".special-selector"></content>
+    <footer>Footer after distributed dom.</footer>
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        "is": "dom-distribution",
+
+      });
+    }
+  </script>
+</dom-module>
+<!--
+In shadow DOM, the browser maintains separate light DOM and shadow DOM trees,
+and creates a merged view (the composed tree) for rendering purposes. addChild
+adds a node to an element’s light DOM.
+
+In shady DOM, Polymer maintains its own light DOM and shady DOM trees.
+The document’s DOM tree is effectively the composed tree.-->

@@ -1,0 +1,41 @@
+<!-- Polymer provides a custom API for manipulating DOM such that local DOM and
+light DOM trees are properly maintained. These methods and properties have the
+same signatures as their standard DOM equivalents, except that properties and
+methods that return a list of nodes return an Array, not a NodeList.-->
+
+<!-- Calling append/insertBefore where parent is a custom Polymer element adds
+the node to the light DOM of the element. In order to insert/append into the
+local dom of a custom element, use this.root as the parent.-->
+
+<!-- The insert, append, and remove operations are transacted lazily in certain
+cases for performance. In order to interrogate the dom (e.g. offsetHeight,
+getComputedStyle, etc.) immediately after one of these operations, call
+Polymer.dom(self).flush() first.
+-->
+
+
+<dom-module id="dom-api">
+  <template>
+    <div>Local dom node.</div>
+    <content></content>
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        "is": "dom-api",
+
+        "ready": (PolymerElement self) {
+          var toLight = new DivElement()..text = "to light";
+          Polymer.dom(self).append(toLight);
+
+          var toLocal = new DivElement()..text = "before local node";
+          var beforeNode = Polymer.dom(self.root).firstElementChild;
+          Polymer.dom(self.root).insertBefore(toLocal, beforeNode);
+        }
+      });
+    }
+  </script>
+</dom-module>

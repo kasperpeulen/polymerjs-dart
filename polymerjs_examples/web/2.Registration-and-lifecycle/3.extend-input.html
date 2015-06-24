@@ -1,0 +1,37 @@
+<!--Polymer currently only supports extending native HTML elements (for example,
+ input, or button, as opposed to extending other custom elements, which will be
+  supported in a future release). These native element extensions are called type
+  extension custom elements.-->
+
+<!--To extend a native HTML element, set the extends property on your prototype
+to the tag name of the element to extend.-->
+
+<script type="application/dart">
+ import "package:polymerjs_examples/polymer.dart";
+
+ @initMethod
+ main() {
+  var MyInput = Polymer.call({
+   "is": "extend-input",
+
+   "extends": "input",
+
+   "created": (PolymerElement self) {
+     self.style.border = "1px solid red";
+   }
+  });
+
+  var el1 = new PolymerElement.fromConstructor(MyInput)
+      ..appendTo(document.body);
+  assert(el1.element is InputElement);
+
+  var el2 = new PolymerElement('input', 'extend-input')
+      ..appendTo(document.body);
+  assert(el2.element is InputElement);
+ }
+</script>
+
+<!--To use a type-extension element in markup, use the native tag and add an is
+ attribute that specifies the extension type name:-->
+
+<!--<input is="extend-input">-->

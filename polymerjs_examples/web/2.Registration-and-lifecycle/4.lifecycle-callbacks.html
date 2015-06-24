@@ -1,0 +1,45 @@
+<!-- Polymer’s Base prototype implements the standard Custom Element lifecycle
+callbacks to perform tasks necessary for Polymer’s built-in features. The hooks
+in turn call shorter-named lifecycle methods on your prototype.
+
+ * created instead of createdCallback
+ * attached instead of attachedCallback
+ * detached instead of detachedCallback
+ * attributeChanged instead of attributeChangedCallback
+
+You can fallback to using the low-level methods if you prefer (in other words,
+you can simply implement createdCallback in your prototype).
+
+Polymer adds an extra callback, ready, which is invoked when Polymer has finished
+creating and initializing the element’s local DOM. -->
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    Polymer.call({
+      "is": "lifecycle-callbacks",
+
+      "created": (PolymerElement self) {
+        print("${self.tagName} was created");
+      },
+      "attached": (PolymerElement self) {
+        print("${self.tagName} was attached");
+      },
+      "detached": (PolymerElement self) {
+        print("${self.tagName} was detached");
+      },
+      "attributeChanged": (PolymerElement self, name, type) {
+        print("${self.tagName} attribute"
+        " was changed to ${self.getAttribute(name)}");
+      }
+    });
+
+    PolymerElement customElement = new PolymerElement('lifecycle-callbacks')
+      ..appendTo(document.body);
+    customElement.setAttribute("id", "myid");
+
+
+  }
+</script>

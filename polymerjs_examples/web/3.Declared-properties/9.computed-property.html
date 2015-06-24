@@ -1,0 +1,57 @@
+<!-- Polymer supports virtual properties whose values are calculated from other
+properties.
+
+To define a computed property, add it to the properties object with a  computed
+key mapping to a computing function.
+
+The computing function is not invoked until once all dependent properties are
+defined (!== undefined). So each dependent properties should have a default
+value defined in properties (or otherwise be initialized to a non-undefined value)
+to ensure the property is computed.
+-->
+
+<dom-module id="computed-property">
+
+  <template>
+    My name is <span>{{fullName}}</span>
+  </template>
+
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        "is": "computed-property",
+
+        "properties": {
+
+          "first": {
+            "value": "Ruud"
+          },
+          "last": {
+            "value": "van Nistelrooy"
+          },
+          "fullName": {
+            "computed": "computeFullName(first,last)",
+            // In specific cases, it may be useful to keep an HTML attribute
+            // value in sync with a property value. This may be achieved by
+            // setting reflectToAttribute: true on a property in the properties
+            // configuration object. This will cause any change to the property
+            // to be serialized out to an attribute of the same name.
+            "reflectToAttribute": true
+          }
+        },
+        "computeFullName": (_, first, last) => "$first $last"
+      });
+    }
+  </script>
+</dom-module>
+
+<!--Arguments to computing functions may be simple properties on the element,
+as well as any of the arguments types supported by observers, including paths,
+paths with wildcards, and paths to array splices.
+
+The arguments received by the computing function match those described in
+the sections referenced above.-->
+

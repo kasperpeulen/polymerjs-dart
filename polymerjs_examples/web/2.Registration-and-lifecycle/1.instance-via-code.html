@@ -1,0 +1,30 @@
+<!--To register a custom element, use the Polymer function, and pass in the
+ prototype for the new element. The prototype must have an is property that
+ specifies the HTML tag name for your custom element.
+
+By specification, the custom element’s name must contain a dash (-).-->
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+  import 'package:initialize/initialize.dart';
+
+  @initMethod
+  main() {
+    Polymer.call({
+
+      "is": "instance-via-code",
+
+      // those lifecycle callbacks will be explained later
+      "created": (self)  {
+        self.text = "Initiated by code!";
+      }
+    });
+
+    // The polymer function registers the element with the browser.
+    // The PolymerElement constructor can be used to create a new instance of
+    // your element via code.
+    var myElement = new PolymerElement('instance-via-code')
+      ..appendTo(document.body);
+  }
+</script>
