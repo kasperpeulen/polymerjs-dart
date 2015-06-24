@@ -1,0 +1,38 @@
+<dom-module id="declared-properties">
+  <template>
+    hello
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        "is": 'declared-properties',
+
+        "properties": {
+          'user': String,
+          "isHappy": bool,
+          "count": {
+            "type": int,
+            "notify": true,
+            "value": 0
+          }
+        },
+
+        "listeners": {
+          'count-changed': 'countHandler'
+        },
+
+        "ready": (PolymerElement self) {
+          self.innerHtml = 'Hello World, I am a <b>Custom Element!</b>';
+          self["count"] = 1;
+        },
+        "countHandler": ([self,customEvent, detail]) {
+          print([customEvent,detail]);
+        }
+      });
+    }
+  </script>
+</dom-module>
+

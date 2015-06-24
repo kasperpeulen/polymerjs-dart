@@ -1,0 +1,54 @@
+<!--Custom element properties may be observed for changes by specifying observer
+ property in the properties object for the property that gives the name of a
+ function to call. When the property changes, the change handler will be called
+  with the new and old values as arguments.-->
+
+<link rel="import" href="packages/polymerjs_examples/components/paper-checkbox/paper-checkbox.html">
+
+<dom-module id="change-observer">
+  <style>
+    :host {
+      display: block;
+      margin: 10px;
+    }
+
+    :host.highlight {
+      background: red;
+    }
+  </style>
+  <template>
+    <paper-checkbox checked="{{checked}}">highlighting label</paper-checkbox>
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        "is": "change-observer",
+        "properties" : {
+          "checked": {
+            "type": bool,
+            "observer": "checkedChanged"
+          },
+          "highlight": {
+            "type": bool,
+            "observer": "highlightChanged",
+            "reflectToAttribute": true
+          }
+        },
+
+        "checkedChanged" : (PolymerElement self, newValue, [oldValue]) {
+          self["highlight"] = newValue;
+        },
+
+        "highlightChanged": (PolymerElement self, newValue, [oldValue]) {
+          self.toggleClass("highlight", true);
+          self.async(() {
+            self.toggleClass("highlight", false);
+          }, 300);
+        }
+      });
+    }
+  </script>
+</dom-module>

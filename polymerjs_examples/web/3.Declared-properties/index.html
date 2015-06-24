@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>3. Declared properties</title>
+
+    <script src="packages/polymerjs_examples/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+    <link rel="import" href="1.declared-properties.html">
+    <link rel="import" href="2.attribute-deserialization.html">
+    <link rel="import" href="3.change-observer.html">
+    <link rel="import" href="4.observe-multiple.html">
+    <link rel="import" href="5.path-changes.html">
+    <link rel="import" href="6.deep-path-observe.html">
+    <link rel="import" href="7.array-observation.html">
+    <link rel="import" href="8.read-only.html">
+    <link rel="import" href="9.computed-property.html">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=RobotoDraft:300,300italic');
+
+      body {
+        color: #333;
+        font-family: "RobotoDraft", sans-serif;
+        font-weight: 300;
+      }
+    </style>
+
+  </head>
+  <body>
+    <declared-properties></declared-properties>
+    <br>
+    <attribute-deserialization user-name="Scott" manager></attribute-deserialization>
+    <change-observer class="highlight"></change-observer>
+    <observe-multiple></observe-multiple>
+    <path-changes></path-changes>
+    <deep-path-observe></deep-path-observe>
+    <array-observation></array-observation>
+    <read-only></read-only>
+    <computed-property></computed-property>
+    <script type="application/dart">
+      import 'package:polymerjs_examples/polymer.dart' show initWebComponents;
+
+      main() => initWebComponents();
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

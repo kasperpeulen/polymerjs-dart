@@ -1,0 +1,14 @@
+name: polymerjs_examples
+version: 0.0.1
+description: Examples for polymerjs package.
+author: Kasper Peulen <kasperpeulen@gmail.com>
+homepage: https://github.com/kasperpeulen/polymerjs-dart
+environment:
+  sdk: '<2.0.0'
+dependencies:
+  browser: ^0.10.0+2
+  web_components: ^0.12.0+2
+  polymerjs:
+    path: ../
+transformers:
+- web_components

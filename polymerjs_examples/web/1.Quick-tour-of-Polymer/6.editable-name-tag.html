@@ -1,0 +1,42 @@
+
+<!--In addition to text content, you can bind to an element’s properties
+(using property-name="{{binding}}"). Polymer properties can optionally support
+two-way binding.
+
+This example uses two-way binding: binding the value of a custom input element
+(iron-input) to the element’s owner property, so it’s updated as the user types.
+-->
+
+
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+<!-- import the iron-input custom element -->
+<link rel="import" href="packages/polymerjs_examples/components/iron-input/iron-input.html">
+
+<dom-module id="editable-name-tag">
+  <template>
+    <p>
+      This is <strong>{{owner}}</strong>'s editable-name-tag:
+    </p>
+    <!-- iron-input exposes a two-way bindable input value -->
+    <input is="iron-input" bind-value="{{owner}}"
+           placeholder="Your name here...">
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() => Polymer.call({
+      "is": "editable-name-tag",
+      "properties": {
+        "owner": {
+          "type": String,
+          "value": "Daniel"
+        }
+      }
+    });
+  </script>
+</dom-module>
+
+<!--Note: The is="iron-input" attribute indicates the input is a type-extension
+custom element; the element name is iron-input, and it extends the native <input>
+element.-->

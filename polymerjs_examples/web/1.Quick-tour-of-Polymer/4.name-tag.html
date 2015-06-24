@@ -1,0 +1,23 @@
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+
+<!--Of course, it’s not enough to have static local DOM. You usually want to
+have your element update its local DOM dynamically.-->
+<dom-module id="name-tag">
+  <template>
+    <!--You can bind properties in your component using the “double-mustache”
+    syntax. The {{}} is replaced by the value of the property referenced
+    between the brackets.-->
+    <p>This is <strong>{{owner}}</strong>'s name-tag element.</p>
+  </template>
+</dom-module>
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() => Polymer.call({
+    "is": "name-tag",
+    // set this element's owner property
+    "ready": (self) => self["owner"] = "Daniel"
+  });
+</script>

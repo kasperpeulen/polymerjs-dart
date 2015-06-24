@@ -1,0 +1,39 @@
+<!--You can also observe changes to object sub-properties using the  observers
+array, by specifying a full path (company.manager.name) as a function argument.-->
+
+<script type="application/dart">
+  import 'package:polymerjs_examples/polymer.dart';
+
+  @initMethod
+  main() {
+    Polymer.call({
+      'is': 'path-changes',
+      'properties': {
+        'company': {
+          'type': Map,
+          'value': {
+            'manager': {
+              'name': 'John'
+            },
+            'secondManager': {
+              'name': 'Scott'
+            }
+          }
+        }
+      },
+
+      'observers': [
+        'userManagerChanged(company.manager.name)'
+      ],
+
+      'userManagerChanged': (self, manager) {
+        print('new manager name is $manager');
+      },
+
+      'attached': (self) {
+        self['company.manager.name'] = 'Scott';
+        self['company.secondManager.name'] = 'John';
+      }
+    });
+  }
+</script>

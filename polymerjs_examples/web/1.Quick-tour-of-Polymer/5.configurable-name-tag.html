@@ -1,0 +1,27 @@
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+
+<!--Properties are an important part of an element’s public API. Polymer
+declared properties support a number of common patterns for properties --
+setting default values, configuring properties from markup, observing property
+changes, and more.-->
+<dom-module id="configurable-name-tag">
+  <template>
+    <!-- bind to the "owner" property -->
+    <p>This is <strong>{{owner}}</strong>'s configurable-name-tag element.</p>
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() => Polymer.call({
+      "is": "configurable-name-tag",
+      "properties": {
+        // declare the owner property
+        "owner": {
+          "type": String,
+          "value": "Daniel"
+        }
+      }
+    });
+  </script>
+</dom-module>

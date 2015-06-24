@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>5. Events</title>
+
+    <script src="packages/polymerjs_examples/components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+    <link rel="import" href="1.event-listener.html">
+    <link rel="import" href="2.annotated-event.html">
+    <link rel="import" href="3.drag-me.html">
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=RobotoDraft:300,300italic');
+
+      body {
+        color: #333;
+        font-family: "RobotoDraft", sans-serif;
+        font-weight: 300;
+      }
+    </style>
+  </head>
+  <body>
+    <event-listener></event-listener>
+    <annotated-event></annotated-event>
+    <drag-me></drag-me>
+    <script type="application/dart">
+      import 'package:polymerjs_examples/polymer.dart' show initWebComponents;
+
+      main() => initWebComponents();
+    </script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

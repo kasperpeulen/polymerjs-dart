@@ -1,0 +1,33 @@
+<!-- https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html#host-attributes
+If a custom elements needs HTML attributes set on it at create-time, these may
+be declared in a hostAttributes property on the prototype, where keys are the
+attribute name and values are the values to be assigned. Values should typically
+be provided as strings, as HTML attributes can only be strings; however, the
+standard serialize method is used to convert values to strings, so true will
+serialize to an empty attribute, and false will result in no attribtue set,
+and so forth (see Attribute serialization for more details). -->
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    Polymer.call({
+      "is": "static-attributes-on-host",
+
+      //<static-attributes-on-host role="button" aria-disabled tabindex="0">
+      "hostAttributes": {
+        "role": 'button',
+        "aria-disabled": true,
+        "tabindex": 0
+      }
+    });
+
+    new PolymerElement("static-attributes-on-host")
+      ..appendTo(document.body);
+
+  }
+</script>
+
+<!--Note: As of Polymer 0.9, the class attribute can’t be configured using
+hostAttributes.-->

@@ -1,0 +1,55 @@
+<!--Finally, to observe mutations to arrays (changes resulting from calls to push, pop, shift, unshift, and splice, generally referred to as “splices”), specify a path to an array followed by .splices as an argument to the observer function.
+
+The value received by the observer for the splices path of an array is a change records with the following properties:
+
+indexSplices. Lists the set of changes that occurred to the array, in terms of array indicies. Each indexSplices record contains the following properties:
+
+index. Position where the splice started.
+removed. Array of removed items.
+addedCount. Number of new items inserted at index.
+keySplices. Lists the set of changes that occurred to the array in terms of “keys” used by Polymer for identifying array elements. Each keySplices record contains the following properties:
+
+added. Array of added keys.
+removed. Array of removed keys.
+-->
+
+<script type="application/dart">
+  //TODO: get this to work
+
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() {
+    Polymer.call({
+      "is": "array-observation",
+
+      "properties": {
+        "users" : {
+          "type": List,
+          "value": [1,2,3]
+        }
+      },
+
+      "observers": [
+        'usersAddedOrRemoved(users.splices)',
+        'usersChanged(users.*)'
+      ],
+
+      "ready": (self) {
+        self["users"].callMethod("push",[4]);
+      },
+
+      "attached": (self) {
+        self["users"].callMethod("pop");
+        print(self["users"]);
+      },
+
+      "usersAddedOrRemoved": (self, [changeRecord]) {
+        print(changeRecord);
+      },
+      "usersChanged": (self, [changeRecord]) {
+        print(changeRecord);
+      }
+    });
+  }
+</script>

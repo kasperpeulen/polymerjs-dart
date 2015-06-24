@@ -1,0 +1,22 @@
+<link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+
+<script type="application/dart">
+  import "package:polymerjs_examples/polymer.dart";
+
+  @initMethod
+  main() =>
+    // To register a new element, call the `polymer` function, which registers
+    // a new element with the browser. The custom element’s name must contain
+    // a dash (-).
+
+    // The `polymer` function takes as an argument an map.
+    Polymer.call({
+      // Registering an element associates a tag name with a PolymerElement object.
+      "is": "hello-world",
+      // When a custom element finishes its initialization, the ready lifecycle
+      // callback is called. The ready callback is a great place to do
+      // constructor-like initialization work. The argument in the callback is
+      // a PolymerElement object.
+      "ready": (self) => self.text = "Hello world!"
+    });
+</script>

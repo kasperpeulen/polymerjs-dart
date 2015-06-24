@@ -37,3 +37,13 @@ test() =>
     new TestRunner().test(
         files: allFiles,
         platformSelector: macPlatforms);
+
+@Task("Serve polymerjs examples.")
+examples() {
+  run("pub", arguments: ["get"],
+  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+  run("bower", arguments: ["install"],
+  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+  runAsync("pub", arguments: ["serve"],
+  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+}

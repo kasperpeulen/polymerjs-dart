@@ -1,0 +1,36 @@
+<!-- Polymer automatically builds a map of statically created instance nodes in its
+local DOM, to provide convenient access to frequently used nodes without the
+need to query for them manually. Any node specified in the element’s template
+with an id is stored on the this.$ hash by id.-->
+
+<!--Note: Nodes created dynamically using data binding (including those in
+dom-repeat and dom-if templates) are not added to the this.$ hash. The hash
+ includes only statically created local DOM nodes (that is, the nodes defined
+ in the element’s outermost template).-->
+
+<dom-module id="node-finding">
+  <template>
+    Hello World from <span id="name"></span>!
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      Polymer.call({
+        'is': 'node-finding',
+        "ready": (PolymerElement self) {
+          self.$["name"].text = "Kasper";
+        }
+      });
+    }
+  </script>
+</dom-module>
+
+<!-- For locating dynamically-created nodes in your element’s local DOM, use the $$
+method:
+
+this.$$(selector)
+
+$$ returns the first node in the local DOM that matches selector.-->
+

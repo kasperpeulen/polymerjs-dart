@@ -1,0 +1,47 @@
+<!-- The Polymer method returns a basic constructor that can be used to instantiate
+the custom element. If you want to pass arguments to the constructor to configure
+the new element, you can specify a custom factoryImpl function on the prototype.
+
+The constructor returned from Polymer creates an instance using
+document.createElement, then invokes the user-supplied factoryImpl function with
+this bound to the element instance. Any arguments passed to the actual constructor
+are passed on to factoryImpl function.-->
+
+<dom-module id="custom-constructor">
+  <template>
+    <p><strong>{{foo}}</strong> <strong>{{bar}}</strong></p>
+  </template>
+  <script type="application/dart">
+    import "package:polymerjs_examples/polymer.dart";
+
+    @initMethod
+    main() {
+      var CustomConstructor = Polymer.call({
+        "is": "custom-constructor",
+
+        "factoryImpl" : (self, foo, bar) {
+          self["foo"] = foo;
+          self["configureWithBar"]("bar");
+        },
+
+        "configureWithBar" : (self, bar) {
+          self["bar"] = bar;
+        }
+      });
+
+      new PolymerElement.fromConstructor(CustomConstructor, ['foo', 'bar'])
+          ..appendTo(document.body);
+    }
+  </script>
+</dom-module>
+
+<!--Two notes about the custom constructor:-->
+
+<!--The factoryImpl method is only invoked when you create an element using
+the constructor. The factoryImpl method is not called if the element is created
+from markup by the HTML parser, or if the element is created using
+new PolymerElement().-->
+
+<!--The factoryImpl method is called after the element is initialized
+(local DOM created, default values set, and so on). See Ready callback and
+element initialization for more information.-->

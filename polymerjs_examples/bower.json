@@ -1,0 +1,21 @@
+{
+  "name": "polymerjs_examples",
+  "version": "0.0.1",
+  "authors": [
+    "Kasper Peulen <kasperpeulen@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer",
+    "iron-input": "PolymerElements/iron-input",
+    "paper-checkbox": "PolymerElements/paper-checkbox",
+    "paper-styles": "PolymerElements/paper-styles"
+  }
+}
