@@ -8,16 +8,20 @@
     browsers that don’t support the Web Components specifications natively.-->
     <script src="packages/polymerjs_examples/components/webcomponentsjs/webcomponents-lite.min.js">
     </script>
+    <link rel="import" href="packages/polymerjs_examples/components/polymer/polymer.html">
+    <link rel="import" href="packages/polymerjs_examples/components/paper-item/paper-item.html">
+    <link rel="import" href="packages/polymerjs_examples/components/paper-toolbar/paper-toolbar.html">
+    <link rel="import" href="packages/polymerjs_examples/components/paper-material/paper-material.html">
     <!--For this version of Polymer,you need the webcomponents-lite version of
     the library, which doesn’t include the shadow DOM polyfill.-->
 
     <!--Import the custom elements you are using-->
-    <link rel="import" href="1.hello-world.html">
-    <link rel="import" href="2.dom-element.html">
-    <link rel="import" href="3.picture-frame.html">
-    <link rel="import" href="4.name-tag.html">
-    <link rel="import" href="5.configurable-name-tag.html">
-    <link rel="import" href="6.editable-name-tag.html">
+    <!--<link rel="import" href="1.hello-world.html">-->
+    <!--<link rel="import" href="2.dom-element.html">-->
+    <!--<link rel="import" href="3.picture-frame.html">-->
+    <!--<link rel="import" href="4.name-tag.html">-->
+    <!--<link rel="import" href="5.configurable-name-tag.html">-->
+    <!--<link rel="import" href="6.editable-name-tag.html">-->
     <style>
       @import url('https://fonts.googleapis.com/css?family=RobotoDraft:300,300italic');
 
@@ -30,18 +34,18 @@
   </head>
   <body>
     <hello-world></hello-world>
-    <dom-element></dom-element>
-    <picture-frame>
-      <img src="https://www.polymer-project.org/images/logos/p-logo-32.png">
-    </picture-frame>
-    <name-tag></name-tag>
-    <configurable-name-tag></configurable-name-tag>
-    <editable-name-tag></editable-name-tag>
+    <paper-material>hello</paper-material>
 
-    <script type="application/dart">
-      import 'package:polymerjs_examples/polymer.dart' show initWebComponents;
+    <!--<dom-element></dom-element>-->
+    <!--<picture-frame>-->
+      <!--<img src="https://www.polymer-project.org/images/logos/p-logo-32.png">-->
+    <!--</picture-frame>-->
+    <!--<name-tag></name-tag>-->
+    <!--<configurable-name-tag></configurable-name-tag>-->
+    <!--<editable-name-tag></editable-name-tag>-->
 
-      main() => initWebComponents();
+    <script type="application/dart" src="index.dart">
+
     </script>
     <script src="packages/browser/dart.js"></script>
   </body>

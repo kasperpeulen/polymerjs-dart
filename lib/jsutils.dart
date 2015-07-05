@@ -4,8 +4,9 @@ import 'dart:js';
 import 'dart:html';
 import 'package:polymerjs/polymer.dart';
 import 'package:polymerjs/event_details.dart';
+import 'package:polymerjs/element_constructors.dart';
 
-/// Add this class as mixin to your object. You need to implement the js field.
+/// Add this class as mixin to your object. You need to implement the [js] field.
 ///
 /// `object['jsproperty']` will act like `object.js['jsproperty']`
 ///
@@ -30,7 +31,7 @@ abstract class JsMixin {
 }
 
 /// Add this class as mixin to your object. You need to implement the **static**
-/// js field.
+/// [js] field.
 ///
 /// `object['jsproperty']` will act like `Object.js['jsproperty']`
 ///
@@ -67,8 +68,8 @@ dynamic dartify(js) {
     if (!name.contains("-") && js.getAttribute('is') == null) {
       return js;
     }
-    if (constructorFromString.containsKey(name)) {
-      return constructorFromString[name](js);
+    if (elementConstructors.containsKey(name)) {
+      return elementConstructors[name](js);
     }
     return new PolymerElement.from(js);
   }
@@ -81,7 +82,7 @@ dynamic dartify(js) {
     }
     return functionFromJs(js);
   }
-  if (js is CustomEvent){
+  if (js is CustomEvent) {
     if (js.type == "track") {
       return new TrackDetail(new JsObject.fromBrowserObject(js)["detail"], js);
     }
@@ -161,7 +162,7 @@ dynamic jsify(Object dartObject) {
     return jsTypeFromDart[dartObject];
   } else if (dartObject is Function) {
     return new JsFunction.withThis((HtmlElement element,
-                                    [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]) {
+        [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10]) {
       List args = [element, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10];
       args.removeWhere((e) => e == null);
       args = args.map(dartify).toList();
@@ -197,19 +198,16 @@ int _argCount(Function f) {
   if (f is _Func8) return 8;
   if (f is _Func9) return 9;
   if (f is _Func10) return 10;
-  throw 'not supported for more that 10 args';
+  throw 'Oh noes! Not more than 10 args supported.';
 }
 typedef _Func0();
 typedef _Func1(p1);
-typedef _Func2(p1,p2);
-typedef _Func3(p1,p2,p3);
-typedef _Func4(p1,p2,p3,p4);
-typedef _Func5(p1,p2,p3,p4,p5);
-typedef _Func6(p1,p2,p3,p4,p6);
-typedef _Func7(p1,p2,p3,p4,p6,p7);
-typedef _Func8(p1,p2,p3,p4,p6,p7,p8);
-typedef _Func9(p1,p2,p3,p4,p6,p7,p8,p9);
-typedef _Func10(p1,p2,p3,p4,p6,p7,p8,p9,p10);
-
-
-
+typedef _Func2(p1, p2);
+typedef _Func3(p1, p2, p3);
+typedef _Func4(p1, p2, p3, p4);
+typedef _Func5(p1, p2, p3, p4, p5);
+typedef _Func6(p1, p2, p3, p4, p6);
+typedef _Func7(p1, p2, p3, p4, p6, p7);
+typedef _Func8(p1, p2, p3, p4, p6, p7, p8);
+typedef _Func9(p1, p2, p3, p4, p6, p7, p8, p9);
+typedef _Func10(p1, p2, p3, p4, p6, p7, p8, p9, p10);

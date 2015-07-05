@@ -15,16 +15,12 @@ PolymerElement paperItem;
 
 void main() {
   paperItem = $$('paper-item');
-  Stream stream = window.on['WebComponentsReady'];
-  test('WebComponentsReady', () {
-    if (context['CustomElements']['ready'] == null) {
-      stream.listen(expectAsync((e) {
-        expect(context['CustomElements']['ready'], isNotNull);
-      }));
-    } else {
-      expect(context['CustomElements']['ready'], isNotNull);
-    }
+
+  test("PolymerReady", () async {
+    await Polymer.whenReady();
+    expect(context["CustomElements"]["ready"], isNotNull);
   });
+
 
   group('deserialize', () {
     test('int', () {
