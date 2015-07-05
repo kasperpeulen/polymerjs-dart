@@ -13,16 +13,16 @@ abstract class HtmlElementMixin {
   /// represents the element's style attribute.
   CssStyleDeclaration get style => element.style;
 
-   /// The set of CSS classes applied to this element.
-   ///
-   /// This set makes it easy to add, remove or toggle the classes applied to
-   /// this element.
-   ///
-   /// <pre><code>
-   ///     element.classes.add('selected');
-   ///     element.classes.toggle('isOnline');
-   ///     element.classes.remove('selected');
-   /// </code></pre>
+  /// The set of CSS classes applied to this element.
+  ///
+  /// This set makes it easy to add, remove or toggle the classes applied to
+  /// this element.
+  ///
+  /// <pre><code>
+  ///     element.classes.add('selected');
+  ///     element.classes.toggle('isOnline');
+  ///     element.classes.remove('selected');
+  /// </code></pre>
   CssClassSet get classes => element.classes;
 
   /// All text within this node and its decendents.
@@ -42,9 +42,9 @@ abstract class HtmlElementMixin {
    */
   Map<String, String> get attributes => element.attributes;
 
-   /// All text within this node and its decendents.
-   ///
-   /// See also: [Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node.textContent) from MDN.
+  /// All text within this node and its decendents.
+  ///
+  /// See also: [Node.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node.textContent) from MDN.
   set text(String value) => element.text = value;
 
   /// The id property represents the element's identifier, reflecting the id

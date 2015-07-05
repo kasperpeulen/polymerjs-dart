@@ -18,5 +18,4 @@ void main() {
     expect($$('div') is PolymerElement, false);
     expect($$('div'), new isInstanceOf<WebElement>());
   });
-
 }
