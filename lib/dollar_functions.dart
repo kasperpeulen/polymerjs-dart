@@ -1,8 +1,6 @@
-/// Finds the first descendant element of this document that matches the
-/// specified group of selectors.
-
 import 'dart:html';
 import 'package:polymerjs/polymer.dart';
+import 'package:polymerjs/element_constructors.dart';
 
 /// This is a shortcut for `querySelector`.
 ///
@@ -28,8 +26,8 @@ WebElement $$(String selectors) {
     return new WebElement.from(element);
   }
   // search for a specific constructor
-  if (constructorFromString.containsKey(name)) {
-    return constructorFromString[name](element);
+  if (elementConstructors.containsKey(name)) {
+    return elementConstructors[name](element);
   }
   return new PolymerElement.from(element);
 }

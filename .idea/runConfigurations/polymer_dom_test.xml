@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="polymer_dom_test" type="JavascriptDebugType" factoryName="JavaScript Debug" folderName="test" engineId="bfee1b69-a97d-4338-8ba4-25170adcbaa6" uri="http://localhost:63345/polymerjs-dart/test/polymer_dom_test.html">
+    <method>
+      <option name="ToolBeforeRunTask" enabled="true" actionId="Tool_grind_prepare-tests-for-debugging" />
+    </method>
+  </configuration>
+</component>

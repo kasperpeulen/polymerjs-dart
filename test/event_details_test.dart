@@ -1,6 +1,5 @@
 @TestOn('browser')
 
-// TODO make this work in safari...
 library polymerjs.event_details_test;
 
 import 'dart:html';
@@ -16,45 +15,35 @@ void main() {
   Stream webComponentsReadyStream = window.on['WebComponentsReady'];
   PolymerElement eventListener;
 
-  test("WebComponentsReady", () {
-    // if webcomponents are not yet ready, wait until they are ready
-    if (context["CustomElements"]["ready"] == null) {
-      webComponentsReadyStream.listen(expectAsync(
-              (_) => expect(context["CustomElements"]["ready"], isNotNull)));
-    }
-  });
+  test("PolymerReady", () async {
+    await Polymer.whenReady();
+    expect(context["CustomElements"]["ready"], isNotNull);
 
-  test('setup', () {
     Polymer.call({
       'is': 'event-listener',
-      'listeners': {
-        'tap': 'tap',
-        'down': 'down',
-        'up': 'up',
-        'track': 'track'
-      },
+      'listeners': {'tap': 'tap', 'down': 'down', 'up': 'up', 'track': 'track'},
       'tap': (PolymerElement self, TapDetail e) {
         self['checkTypeDetail'] = e is TapDetail;
         self['checkTypeX'] = e.x is int;
-        self['checkTypeY'] =  e.y is int;
+        self['checkTypeY'] = e.y is int;
         self.element.text = "I'm tapped!";
       },
       'down': (PolymerElement self, DownDetail e) {
         self['checkTypeDetail'] = e is DownDetail;
         self['checkTypeX'] = e.x is int;
-        self['checkTypeY'] =  e.y is int;
+        self['checkTypeY'] = e.y is int;
         self.element.text = "I'm down!";
       },
       'up': (PolymerElement self, UpDetail e) {
         self['checkTypeDetail'] = e is UpDetail;
         self['checkTypeX'] = e.x is int;
-        self['checkTypeY'] =  e.y is int;
+        self['checkTypeY'] = e.y is int;
         self.element.text = "I'm up!";
       },
       'track': (PolymerElement self, TrackDetail e) {
         self['checkTypeDetail'] = e is TrackDetail;
         self['checkTypeX'] = e.x is int;
-        self['checkTypeY'] =  e.y is int;
+        self['checkTypeY'] = e.y is int;
         self.element.text = "I'm tracked at ${[e.ddx, e.ddy, e.state]}!";
       }
     });
@@ -62,8 +51,7 @@ void main() {
       ..appendTo(document.body);
   });
 
-
-  group('tap',(){
+  group('tap', () {
     test('text', () {
       MockInteractions.tap($('event-listener'));
       expect(eventListener.element.text, 'I\'m tapped!');
@@ -79,7 +67,7 @@ void main() {
     });
   });
 
-  group('down',(){
+  group('down', () {
     test('text', () {
       MockInteractions.down($('event-listener'));
       expect(eventListener.element.text, 'I\'m down!');
@@ -98,7 +86,7 @@ void main() {
     });
   });
 
-  group('up',(){
+  group('up', () {
     test('text', () {
       MockInteractions.up($('event-listener'));
       expect(eventListener.element.text, 'I\'m up!');
@@ -117,7 +105,7 @@ void main() {
     });
   });
 
-  group('track',(){
+  group('track', () {
     test('text', () {
       MockInteractions.track($('event-listener'));
       expect(eventListener.element.text, 'I\'m tracked at [0, 0, end]!');
@@ -136,4 +124,3 @@ void main() {
     });
   });
 }
-

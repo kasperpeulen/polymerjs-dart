@@ -14,10 +14,34 @@
     "tests"
   ],
   "dependencies": {
+    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea",
     "polymer": "Polymer/polymer",
     "iron-test-helpers": "PolymerElements/iron-test-helpers",
     "iron-pages": "PolymerElements/iron-pages",
     "paper-drawer-panel": "PolymerElements/paper-drawer-panel",
-    "paper-item": "PolymerElements/paper-item"
+    "paper-item": "PolymerElements/paper-item",
+    "paper-header-panel": "PolymerElements/paper-header-panel",
+    "iron-icon": "PolymerElements/iron-icon",
+    "iron-icons": "PolymerElements/iron-icons",
+    "iron-iconset": "PolymerElements/iron-iconset",
+    "iron-collapse": "PolymerElements/iron-collapse",
+    "iron-iconset-svg": "PolymerElements/iron-iconset-svg",
+    "paper-button": "PolymerElements/paper-button",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button",
+    "paper-fab": "PolymerElements/paper-fab",
+    "paper-toolbar": "PolymerElements/paper-toolbar",
+    "paper-toast": "PolymerElements/paper-toast",
+    "paper-menu": "PolymerElements/paper-menu",
+    "paper-tabs": "PolymerElements/paper-tabs",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout",
+    "paper-icon-button":  "PolymerElements/paper-icon-button",
+    "paper-radio-button":  "PolymerElements/paper-radio-button",
+    "paper-material":  "PolymerElements/paper-material",
+    "paper-input":  "PolymerElements/paper-input",
+    "paper-dialog":  "PolymerElements/paper-dialog",
+    "paper-checkbox":  "PolymerElements/paper-checkbox",
+    "paper-progress":  "PolymerElements/paper-progress",
+    "google-apis": "GoogleWebComponents/google-apis",
+    "google-calendar": "GoogleWebComponents/google-calendar"
   }
 }

@@ -8,7 +8,7 @@ import 'package:polymerjs/jsutils.dart';
 /// <script src="components/iron-test-helpers/mock-interactions.js"></script>
 /// <script src="components/iron-test-helpers/test-helpers.js"></script>
 class MockInteractions extends Object with JsStaticMixin {
-  
+
   static JsObject js = context["MockInteractions"];
 
   static blur(HtmlElement target) => js["blur"].apply([target]);
