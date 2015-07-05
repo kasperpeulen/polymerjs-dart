@@ -1,6 +1,5 @@
 library polymerjs.element_constructors;
 
-export 'dart:html';
 export 'package:polymerjs/polymer.dart';
 export 'package:polymerjs/components_dartapis/google_calendar.dart';
 import 'package:polymerjs/components_dartapis/google_calendar.dart';

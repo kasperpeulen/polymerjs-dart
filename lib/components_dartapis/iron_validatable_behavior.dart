@@ -42,9 +42,11 @@ abstract class IronValidatableBehavior {
   /// @default false
   set invalid(bool value) { js['invalid'] = value; }
 
-  void hasValidator() => js.callMethod('hasValidator', []);
+  /// @return {boolean} True if the validator `validator` exists.
+  bool hasValidator() => js.callMethod('hasValidator', []);
 
   /// @param {Object} values Passed to the validator's `validate()` function.
-  void validate(Map values) => js.callMethod('validate', [values]);
+  /// @return {boolean} True if `values` is valid.
+  bool validate(Map values) => js.callMethod('validate', [values]);
 
 }
