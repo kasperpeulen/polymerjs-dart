@@ -5,19 +5,18 @@ import 'dart:js';
 import 'dart:html';
 import 'package:polymerjs/jsutils.dart';
 
-
 /// This event fires when moving while finger/button is down.
 class TrackDetail extends Detail {
-
-  TrackDetail(JsObject js, CustomEvent event) : super(js, event),
-  state = js['state'],
-  x = js['x'],
-  y = js['y'],
-  dx = js['dx'],
-  dy = js['dy'],
-  ddx = js['ddx'],
-  ddy = js['ddy'],
-  sourceEvent = js['sourceEvent'];
+  TrackDetail(JsObject js, CustomEvent event)
+      : super(js, event),
+        state = js['state'],
+        x = js['x'],
+        y = js['y'],
+        dx = js['dx'],
+        dy = js['dy'],
+        ddx = js['ddx'],
+        ddy = js['ddy'],
+        sourceEvent = js['sourceEvent'];
 
   /// A string indicating the tracking state. The possible values are:
   ///
@@ -56,10 +55,11 @@ class TrackDetail extends Detail {
 
 /// This event fires when finger/button went down.
 class DownDetail extends Detail {
-  DownDetail(JsObject js, CustomEvent event) : super(js, event),
-  x = js['x'],
-  y = js['y'],
-  sourceEvent = js['sourceEvent'];
+  DownDetail(JsObject js, CustomEvent event)
+      : super(js, event),
+        x = js['x'],
+        y = js['y'],
+        sourceEvent = js['sourceEvent'];
 
   /// clientX coordinate for event
   final int x;
@@ -73,10 +73,11 @@ class DownDetail extends Detail {
 
 /// This event fires when finger/button went up.
 class UpDetail extends Detail {
-  UpDetail(JsObject js, CustomEvent event) : super(js, event),
-  x = js['x'],
-  y = js['y'],
-  sourceEvent = js['sourceEvent'];
+  UpDetail(JsObject js, CustomEvent event)
+      : super(js, event),
+        x = js['x'],
+        y = js['y'],
+        sourceEvent = js['sourceEvent'];
 
   /// clientX coordinate for event
   final int x;
@@ -90,10 +91,11 @@ class UpDetail extends Detail {
 
 /// This event fires when finger/button went up and down.
 class TapDetail extends Detail {
-  TapDetail(JsObject js, CustomEvent event) : super(js, event),
-  x = js['x'],
-  y = js['y'],
-  sourceEvent = js['sourceEvent'];
+  TapDetail(JsObject js, CustomEvent event)
+      : super(js, event),
+        x = js['x'],
+        y = js['y'],
+        sourceEvent = js['sourceEvent'];
 
   /// clientX coordinate for event
   final int x;
@@ -105,7 +107,7 @@ class TapDetail extends Detail {
   final Event sourceEvent;
 }
 
-class Detail extends Object with JsMixin{
+class Detail extends Object with JsMixin {
   final CustomEvent customEvent;
 
   final JsObject js;

@@ -407,8 +407,8 @@ abstract class PolymerBase {
   /// [attribute] Attribute name to serialize to.
   ///
   /// [node] Element to set attribute to (defaults to this).
-  HtmlElement serializeValueToAttribute(
-          value, String attribute, [HtmlElement node]) =>
+  HtmlElement serializeValueToAttribute(value, String attribute,
+          [HtmlElement node]) =>
       this['serializeValueToAttribute'](value, attribute, node);
 
   /// Convienence method for setting a value to a path and notifying any elements

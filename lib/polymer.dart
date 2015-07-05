@@ -7,6 +7,8 @@ import 'package:polymerjs/jsutils.dart';
 import 'package:polymerjs/polymerdom.dart';
 import 'package:polymerjs/polymerbase.dart';
 import 'package:polymerjs/html_element_mixin.dart';
+import 'package:polymerjs/element_constructors.dart';
+import 'dart:async';
 
 export 'package:polymerjs/polymerdom.dart';
 export 'package:polymerjs/dollar_functions.dart';
@@ -14,23 +16,33 @@ export 'package:polymerjs/event_details.dart';
 
 typedef PolymerElement DartConstructor(HtmlElement element);
 
-Map<String, Function> constructorFromString = {};
-
 class Polymer extends Object {
   static final JsObject js = context['Polymer'];
 
   static void registerDartClass(String tagName, DartConstructor constructor) {
     tagName = tagName.toLowerCase();
-    constructorFromString[tagName] = (element) => constructor(element);
+    elementConstructors[tagName] = (element) => constructor(element);
   }
 
-  static void registerElement(String tagName, JsFunction jsConstructor, [DartConstructor constructor]) {
+  static void registerElement(String tagName, JsFunction jsConstructor,
+      [DartConstructor constructor]) {
     if (constructor != null) {
       registerDartClass(tagName, constructor);
     }
     new JsObject.fromBrowserObject(document).callMethod(
-        'registerElement',
-        [tagName, jsConstructor]);
+        'registerElement', [tagName, jsConstructor]);
+  }
+
+  static JsObject HTMLImports = context['HTMLImports'];
+
+  /**
+   * Return a `Future` that completes when Polymer element registration is
+   * finished.
+   */
+  static Future whenReady() {
+    Completer completer = new Completer();
+    HTMLImports.callMethod('whenReady', [completer.complete]);
+    return completer.future;
   }
 
   // TODO more tests
@@ -65,30 +77,23 @@ class Polymer extends Object {
 class WebElement extends Object with JsMixin, HtmlElementMixin {
   final HtmlElement element;
 
-  JsObject _js;
-  JsObject get js {
-    if (_js == null) {
-      _js = new JsObject.fromBrowserObject(element);
-    }
-    return _js;
-  }
+  JsObject js;
 
   WebElement(String tag, [String typeExtension])
-      : element = new Element.tag(tag, typeExtension);
+      : this.from(new Element.tag(tag, typeExtension));
 
   // This is needed to avoid the following issue:
   // https://github.com/dart-lang/sdk/issues/23661
-  WebElement.tag(String tag) : this(tag, null);
-
-  // This is needed to avoid the following issue:
-  // https://github.com/dart-lang/sdk/issues/23661
+  WebElement.tag(String tag) : this(tag);
   WebElement.extension(String tag, String typeExtension)
       : this(tag, typeExtension);
 
-  WebElement.from(this.element);
+  WebElement.from(this.element) {
+    js = new JsObject.fromBrowserObject(element);
+  }
 
-  WebElement.fromJsObject(JsObject jsHTMLElement)
-      : element = htmlElementFromJsElement(jsHTMLElement);
+  WebElement.fromJsObject(JsObject jsHTMLElement) :
+      this.from(htmlElementFromJsElement(jsHTMLElement));
 
   void appendTo(HtmlElement parent) {
     parent.append(element);
@@ -115,6 +120,9 @@ class WebElement extends Object with JsMixin, HtmlElementMixin {
 }
 
 class PolymerElement extends WebElement with PolymerBase {
+
+  Map<String, Stream> _eventStreams = {};
+
   PolymerElement(String tag, [String typeExtension])
       : super.extension(tag, typeExtension);
 
@@ -122,6 +130,29 @@ class PolymerElement extends WebElement with PolymerBase {
 
   PolymerElement.fromConstructor(JsFunction constructor, [List args])
       : super.fromJsObject(new JsObject(constructor, args));
+
+  // This is needed to avoid the following issue:
+  // https://github.com/dart-lang/sdk/issues/23661
+  PolymerElement.tag(String tag) : this(tag);
+  PolymerElement.extension(String tag, String typeExtension)
+      : this(tag, typeExtension);
+
+  Stream on(String eventName, {Function converter, bool sync: false}) {
+    if (!_eventStreams.containsKey(eventName)) {
+      StreamController controller = new StreamController.broadcast(sync: sync);
+      _eventStreams[eventName] = controller.stream;
+      element.on[eventName].listen((e) {
+        controller.add(converter == null ? e : converter(e));
+      });
+    }
+
+    return _eventStreams[eventName];
+  }
+
+  Stream get onTap => on('tap');
+
+  Stream get onDown => on('down');
+
 
   @override
   dynamic operator [](String propertyName) {
