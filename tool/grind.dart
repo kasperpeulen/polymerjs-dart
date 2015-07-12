@@ -32,7 +32,7 @@ bower() {
 }
 
 @DefaultTask('Test')
-@Depends('bower')
+@Depends(bower)
 test() =>
     new TestRunner().test(
         files: allFiles,
@@ -41,9 +41,9 @@ test() =>
 @Task("Serve polymerjs examples.")
 examples() {
   run("pub", arguments: ["get"],
-  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+      runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
   run("bower", arguments: ["install"],
-  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+      runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
   runAsync("pub", arguments: ["serve"],
-  runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
+      runOptions: new RunOptions(workingDirectory: "polymerjs_examples"));
 }
